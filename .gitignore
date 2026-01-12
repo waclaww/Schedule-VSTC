@@ -1,0 +1,183 @@
+# ================================
+# Общие для всех проектов
+# ================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyc
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.python-version
+
+# ================================
+# Virtual Environments
+# ================================
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+
+# ================================
+# IDE и редакторы
+# ================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+*.tmproj
+*.sublime-workspace
+*.sublime-project
+*.komodoproject
+.komodotools
+.fleet/
+
+# ================================
+# Системные файлы
+# ================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ================================
+# Папка 1: checkUpdates
+# ================================
+checkUpdates/private.py
+checkUpdates/__pycache__/
+checkUpdates/*.pyc
+
+# ================================
+# Папка 2: server
+# ================================
+# Конфигурационные файлы
+server/.env
+server/.env.*
+server/.env.local
+server/.env.development
+server/.env.production
+server/.env.test
+
+# Alembic миграции (генерируемые файлы)
+server/app/migrations/versions/*.py
+!server/app/migrations/versions/__init__.py
+
+# Временные файлы БД
+server/*.db
+server/*.sqlite
+server/*.sqlite3
+
+# Логи
+server/logs/
+server/*.log
+
+# ================================
+# Папка 3: tg бот
+# ================================
+tg_bot/private.py
+tg_bot/__pycache__/
+tg_bot/*.pyc
+tg_bot/.env
+tg_bot/.env.*
+
+# Универсальные названия для tg бота
+telegram_bot/private.py
+telegram_bot/__pycache__/
+telegram_bot/*.pyc
+telegram_bot/.env
+
+bot/private.py
+bot/__pycache__/
+bot/*.pyc
+bot/.env
+
+# ================================
+# Общие приватные файлы (любая папка)
+# ================================
+private.py
+.env
+.env.*
+secrets.ini
+config_secret.py
+credentials.json
+*.key
+*.pem
+*.crt
+firebase*.json
+service-account*.json
+
+# ================================
+# Базы данных и временные файлы
+# ================================
+instance/
+*.dump
+*.backup
+*.db-journal
+*.sqlite-journal
+
+# ================================
+# Docker
+# ================================
+docker-compose.override.yml
+.dockerignore
+*.dockerfile
+
+# ================================
+# Тестирование
+# ================================
+.tox/
+.mypy_cache/
+test-reports/
+
+# ================================
+# Jupyter
+# ================================
+.ipynb_checkpoints/
+*.ipynb
+
+# ================================
+# Пакеты и зависимости
+# ================================
+poetry.lock
+Pipfile.lock
+.pdm.toml
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ================================
+# Прочее
+# ================================
+*.bak
+*.tmp
+temp/
+tmp/
+.celery/
+.sass-cache/
+node_modules/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ================================
+# Git
+# ================================
+!.gitkeep
+!.gitignore
