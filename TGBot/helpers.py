@@ -1,18 +1,26 @@
 import requests
 import json
 import ast
+<<<<<<< HEAD
 from datetime import date as dt
+=======
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
 
 def get_schedule(group_name: str, day: str = "today"):
     response = requests.post(
+<<<<<<< HEAD
         "http://server:8000/schedule/vstechnical_group/",
+=======
+        "http://127.0.0.1:8000/schedule/vstechnical_group/",
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
         json={"group_name": group_name}
     )
     raw = json.loads(response.content)[day]
     return ast.literal_eval(raw)
 
 
+<<<<<<< HEAD
 def transformDate(date: str):
     
     weekDays = {
@@ -90,11 +98,21 @@ def viewSchedule(data: list):
     for i in range(1, len(times)):
         if lessons[i] != "":
             text += f"\n{times[i]} <b>|</b> {lessons[i]} {rooms[i]}\n"
+=======
+def viewSchedule(data: list):
+    print(data)
+    text = f"Расписание учебной группы {data[1][0]}:\n"
+    prev_time, prev_lesson = None, None  
+    for i in range(1, len(data[0])):
+        if data[1] != "":
+            text += f"\n{data[0][i]} \"{data[1][i]} : {data[2][i]}\"\n"
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
     return text
 
 
 def markup_to_json(markup):
     return json.dumps(markup.to_dict(), sort_keys=True)
+<<<<<<< HEAD
 
 def user_auth():
     return False
@@ -108,3 +126,5 @@ def generate_code(chat_id: int) -> str:
 
 
 
+=======
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8

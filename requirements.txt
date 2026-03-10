@@ -36,7 +36,11 @@ pydantic_core==2.41.4
 pygame==2.6.1
 PyJWT==2.10.1
 PyMySQL==1.1.2
+<<<<<<< HEAD
 pyTelegramBotAPI==4.31.0
+=======
+pyTelegramBotAPI==4.29.1
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 python-dotenv==1.2.1
 python-jose==3.5.0
 realtime==2.20.0
@@ -57,5 +61,8 @@ typing-inspection==0.4.2
 typing_extensions==4.15.0
 urllib3==2.5.0
 uvicorn==0.38.0
+<<<<<<< HEAD
 validations==0.1.1
+=======
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 websockets==15.0.1

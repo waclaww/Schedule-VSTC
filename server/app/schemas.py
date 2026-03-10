@@ -15,5 +15,8 @@ class VstechnicalArchive_schema(BaseModel):
     date: datetime
     schedule: str
 
+<<<<<<< HEAD
 class generateCode(BaseModel):
     chat_id: int
+=======
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8

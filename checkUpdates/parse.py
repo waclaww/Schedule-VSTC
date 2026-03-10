@@ -134,6 +134,7 @@ def toDateTime(date_string: str):
     
     elif date_string[0] == 'на':
         """Надо будет дописать"""
+<<<<<<< HEAD
         year = date_string[3]
         month = months.get(date_string[2][0:3])
         day = date_string[1]
@@ -144,3 +145,7 @@ def toDateTime(date_string: str):
         
 # print(toDateTime("с 12 по 16 января 2026  года"))
 
+=======
+        pass
+# print(toDateTime("с 12 по 16 января 2026  года"))
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8

@@ -3,6 +3,7 @@ from telebot import types
 from private import bot
 from database import connection, cursor
 from helpers import *
+<<<<<<< HEAD
 from keyboards import *
 from json.decoder import JSONDecodeError
 from datetime import datetime
@@ -10,11 +11,23 @@ from zoneinfo import ZoneInfo
 
 
 #КНОПКИ
+=======
+
+#КНОПКИ
+schedule = types.InlineKeyboardMarkup(row_width=1)
+kb = types.InlineKeyboardButton
+schedule.add(
+    kb(text="На сегодня", callback_data="today"),
+    kb(text="На завтра", callback_data="tomorrow"),
+    kb(text="Сменить группу", callback_data="change_group")
+)
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
 
 #СТАРТ БОТА
 @bot.message_handler(commands=['start'])
 def start(message):
+<<<<<<< HEAD
     bot.delete_message(message.chat.id, message.message_id)
     cursor.execute("SELECT * FROM users WHERE chat_id = ?", [message.chat.id])
     user = cursor.fetchone()
@@ -89,10 +102,35 @@ def auth_in_app(message):
         parse_mode="HTML",
     )
     
+=======
+    cursor.execute("SELECT * FROM users WHERE chat_id = ?", [message.chat.id])
+    user = cursor.fetchone()
+    if user:
+        if user[3]:  # group_name
+            data = get_schedule(user[3], "today")
+            sent = bot.send_message(
+                message.chat.id,
+                viewSchedule(data),
+                reply_markup=schedule
+            )
+            cursor.execute("UPDATE users SET schedule_msg_id = ? WHERE chat_id = ?", [sent.message_id, message.chat.id])
+            connection.commit()
+        else:
+            cursor.execute("UPDATE users SET step = ? WHERE chat_id = ?", ["get_group", message.chat.id])
+            connection.commit()
+            bot.send_message(message.chat.id, f"Здравствуйте, @{message.from_user.username}, введите название вашей учебной группы.")
+    else:
+        cursor.execute("INSERT INTO users (chat_id, step) VALUES (?, ?)", [message.chat.id, "get_group"])
+        connection.commit()
+        bot.send_message(message.chat.id, f"Здравствуйте, @{message.from_user.username}! Этот бот создан для удобного просмотра расписания учебных занятий ВГТК. Введите название вашей учебной группы.")
+
+
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 #ТЕКСТОВЫЕ СООБЩЕНИЯ
 @bot.message_handler(content_types=['text'])
 def main(message):
     mci, text = message.chat.id, message.text
+<<<<<<< HEAD
     
     cursor.execute("SELECT step FROM users WHERE chat_id = ?", [mci])
     step = cursor.fetchone()
@@ -150,6 +188,27 @@ def main(message):
                     text=viewSchedule(data[0]),
                     reply_markup=tomorrowSchedule,
                     parse_mode="HTML"
+=======
+    cursor.execute("SELECT step FROM users WHERE chat_id = ?", [mci])
+    step = cursor.fetchone()
+    if step: step = step[0]
+
+    if step in ("get_group", "change_group"):
+        group_name = text.upper()
+        cursor.execute("UPDATE users SET group_name = ?, step = ? WHERE chat_id = ?", [group_name, None, mci])
+        connection.commit()
+        data = get_schedule(group_name, "today")
+
+        cursor.execute("SELECT schedule_msg_id FROM users WHERE chat_id = ?", [mci])
+        msg_id = cursor.fetchone()
+        if msg_id and msg_id[0]:
+            try:
+                bot.edit_message_text(
+                    chat_id=mci,
+                    message_id=msg_id[0],
+                    text=viewSchedule(data),
+                    reply_markup=schedule
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
                 )
             except telebot.apihelper.ApiTelegramException as e:
                 if "message is not modified" in str(e):
@@ -157,13 +216,20 @@ def main(message):
                 else:
                     raise
         else:
+<<<<<<< HEAD
             pass
             sent = bot.send_message(mci, viewSchedule(data), reply_markup=fullSchedule)
+=======
+            sent = bot.send_message(mci, viewSchedule(data), reply_markup=schedule)
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
             cursor.execute("UPDATE users SET schedule_msg_id = ? WHERE chat_id = ?", [sent.message_id, mci])
             connection.commit()
     bot.delete_message(mci, message.message_id)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 #ОБРАБОТЧИК КНОПОК
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
@@ -173,6 +239,7 @@ def callback_inline(call):
     if call.data in ("today", "tomorrow"):
         cursor.execute("SELECT group_name, schedule_msg_id FROM users WHERE chat_id = ?", [mci])
         row = cursor.fetchone()
+<<<<<<< HEAD
         if row:
             group_name, msg_id = row[0], row[1]
             data = get_schedule(group_name, call.data)
@@ -219,11 +286,28 @@ def callback_inline(call):
             connection.commit()
             cursor.execute("SELECT schedule_msg_id FROM users WHERE chat_id = ?", [mci])
             msg_id = cursor.fetchone()[0]
+=======
+        group_name, msg_id = row[0], row[1]
+        data = get_schedule(group_name, call.data)
+
+        new_text = viewSchedule(data)
+        old_text = call.message.text
+
+        new_markup = schedule
+        old_markup = call.message.reply_markup
+
+        if new_text != old_text or markup_to_json(new_markup) != markup_to_json(old_markup):
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
             try:
                 bot.edit_message_text(
                     chat_id=mci,
                     message_id=msg_id,
+<<<<<<< HEAD
                     text="Введите название новой группы.✍️"
+=======
+                    text=new_text,
+                    reply_markup=new_markup
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
                 )
             except telebot.apihelper.ApiTelegramException as e:
                 if "message is not modified" in str(e):
@@ -231,6 +315,7 @@ def callback_inline(call):
                 else:
                     raise
         else:
+<<<<<<< HEAD
             bot.delete_message(call.message.chat.id, call.message.message_id)
             mes_id = bot.send_message(call.message.chat.id, "Введите название новой группы.✍️").message_id
             cursor.execute("INSERT INTO users (chat_id, group_name, step, schedule_msg_id) VALUES (?, ?, ?, ?)", [call.message.chat.id,  call.message.text, "change_group", mes_id])
@@ -263,3 +348,26 @@ def callback_inline(call):
 
 print("Бот запущен...")
 bot.polling(none_stop=True)
+=======
+            bot.answer_callback_query(call.id, text="Расписание не изменилось")
+
+    elif call.data == "change_group":
+        cursor.execute("UPDATE users SET step = 'change_group' WHERE chat_id = ?", [mci])
+        connection.commit()
+        cursor.execute("SELECT schedule_msg_id FROM users WHERE chat_id = ?", [mci])
+        msg_id = cursor.fetchone()[0]
+        try:
+            bot.edit_message_text(
+                chat_id=mci,
+                message_id=msg_id,
+                text="Введите название новой группы."
+            )
+        except telebot.apihelper.ApiTelegramException as e:
+            if "message is not modified" in str(e):
+                pass
+            else:
+                raise
+
+print("Бот запущен...")
+bot.polling(none_stop=True)
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8

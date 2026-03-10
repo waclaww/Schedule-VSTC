@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from .models.router import router
 import uvicorn
+<<<<<<< HEAD
 from helpers import generate_random_string
 from app.models.models import Codes, Users
 from app.database import async_session_maker
@@ -101,6 +102,11 @@ async def add_user(chat_id: int):
                 return "Пользователя нет"        
         
 
+=======
+ 
+app = FastAPI()
+
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 app.include_router(router)
 
 

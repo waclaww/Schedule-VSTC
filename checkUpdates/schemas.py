@@ -1,11 +1,16 @@
 from pydantic import BaseModel
+<<<<<<< HEAD
 from datetime import date
+=======
+from datetime import datetime
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
 class VStechnicalInput(BaseModel):
     date: str
     schedule: str
     
     
+<<<<<<< HEAD
 from pydantic import BaseModel, field_validator
 
 class VstechnicalArchive(BaseModel):
@@ -22,5 +27,11 @@ class VstechnicalArchive(BaseModel):
         except ValueError:
             raise ValueError('Дата должна быть в формате ГГГГ-ММ-ДД')
     
+=======
+class VstechnicalArchive(BaseModel):
+    date: datetime
+    schedule: str
+    
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
     

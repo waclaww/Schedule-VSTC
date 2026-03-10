@@ -74,7 +74,10 @@ server/.env.local
 server/.env.development
 server/.env.production
 server/.env.test
+<<<<<<< HEAD
 server/helpers.py
+=======
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
 # Alembic миграции (генерируемые файлы)
 server/app/migrations/versions/*.py
@@ -139,7 +142,10 @@ instance/
 docker-compose.override.yml
 .dockerignore
 *.dockerfile
+<<<<<<< HEAD
 *.docker-compose
+=======
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
 # ================================
 # Тестирование
@@ -182,7 +188,11 @@ MANIFEST
 # Git
 # ================================
 !.gitkeep
+<<<<<<< HEAD
 !.gitignore
 
 /schedule_vstc_pwa
 /schedule_vstc_pwa_dev
+=======
+!.gitignore
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8

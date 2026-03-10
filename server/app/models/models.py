@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 from sqlalchemy import BigInteger, ForeignKey, text, Text, String, Date
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from app.database import Base
 import datetime
 
 
+=======
+from sqlalchemy import ForeignKey, text, Text, String
+from sqlalchemy.orm import relationship, Mapped, mapped_column
+from app.database import Base
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
 
 # class School:
@@ -18,8 +24,12 @@ import datetime
 #     school: Mapped["id"] = relationship("School", back_populates="users")
     
     
+<<<<<<< HEAD
 class Vstechnical_data(Base):
     __tablename__ = 'vstechnical_datas'
+=======
+class Vstechincal_data(Base):
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
     id: Mapped[int] = mapped_column(primary_key=True)
     schedule: Mapped[str] = mapped_column(Text, nullable=False)
@@ -34,13 +44,18 @@ class Vstechnical_data(Base):
 class Vstechnical_archive(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     schedule: Mapped[str] = mapped_column(Text, nullable=False)
+<<<<<<< HEAD
     date: Mapped[datetime.date] = mapped_column(nullable=False)
+=======
+    date: Mapped[str] = mapped_column(String(50), nullable=False)
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
     def __str__(self):
         return f"{self.__class__.__name__}(id={self.id}, major_name={self.date!r})"
 
     def __repr__(self):
         return str(self)
+<<<<<<< HEAD
     
     
 class Codes(Base):
@@ -64,6 +79,8 @@ class Users(Base):
 
     def __repr__(self):
         return str(self)
+=======
+>>>>>>> 72d1659d962418f5667d3a9f3ee0be9af88fd7b8
 
 
     
